@@ -8,4 +8,4 @@ user_id = "176201887"
 api = InstagramAPI(access_token=access_token, client_secret=client_secret)
 user_info = api.user(user_id=user_id)
 
-print user_info.counts
+print user_info
