@@ -1,3 +1,4 @@
+#!/Users/dan/.virtualenvs/instagram-test/bin/python
 from instagram.client import InstagramAPI
 import json
 

@@ -1,3 +1,4 @@
+#!/Users/dan/.virtualenvs/instagram-test/bin/python
 from instagram.client import InstagramAPI
 
 access_token = "176201887.877f884.1cdbffd746974bb489a66c2b1df0e958"
