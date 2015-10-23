@@ -12,6 +12,8 @@ def translate(value, leftMin, leftMax, rightMin, rightMax):
     # Convert the 0-1 range into a value in the right range.
     return rightMin + (valueScaled * rightSpan)
 
-sensor_value = 256
-actuator_value = translate(sensor_value, 1, 512, 5, 10)
+#sensor_value = 256
+#actuator_value = translate(sensor_value, 1, 512, 5, 10)
+sensor_value = 12744
+actuator_value = translate(sensor_value, 0, 100000, 0, 2048)
 print actuator_value
