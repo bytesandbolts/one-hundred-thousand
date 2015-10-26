@@ -1,4 +1,4 @@
-#!/Users/dan/.virtualenvs/instagram-test/bin/python
+#!/usr/bin/env python
 import time
 
 def procedure():

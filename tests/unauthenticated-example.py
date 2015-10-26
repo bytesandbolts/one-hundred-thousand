@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from instagram.client import InstagramAPI
 
 client_id = "877f884c9e4d40cf85031245d76a8593"

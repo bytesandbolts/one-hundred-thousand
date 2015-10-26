@@ -1,4 +1,4 @@
-#!/Users/dan/.virtualenvs/instagram-test/bin/python
+#!/usr/bin/env python
 
 # Sourced from: http://stackoverflow.com/questions/1969240/mapping-a-range-of-values-to-another
 def translate(value, leftMin, leftMax, rightMin, rightMax):
