@@ -54,11 +54,12 @@ while True:
             # Motor position control
             motor_position = int(translate(number_of_followers, 0, 100000, 0, 2048))
             if motor_position != previous_motor_position:
-                motor_delta = motor_position - previous_motor_position
+                # abs ensures number is always positive
+                motor_delta = abs(motor_position - previous_motor_position)
                 if motor_position > previous_motor_position:
                     myUln200xa.setDirection(upmULN200XA.ULN200XA.DIR_CCW)
                 elif motor_position < previous_motor_position:
-                    myUln200xa.setDirection(upmULN200XA.ULN200XA.DIR_CCW)
+                    myUln200xa.setDirection(upmULN200XA.ULN200XA.DIR_CW)
                 # Rotate motor
                 myUln200xa.stepperSteps(motor_delta)
 
