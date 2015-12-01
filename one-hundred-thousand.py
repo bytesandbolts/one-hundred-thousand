@@ -53,8 +53,8 @@ while True:
                     myUln200xa.setDirection(upmULN200XA.ULN200XA.DIR_CCW)
                 elif motor_position < previous_motor_position:
                     myUln200xa.setDirection(upmULN200XA.ULN200XA.DIR_CCW)
-                finally:
-                    myUln200xa.stepperSteps(motor_delta)
+                # Rotate motor
+                myUln200xa.stepperSteps(motor_delta)
 
             # LED control
             if number_of_followers > previous_followers:
