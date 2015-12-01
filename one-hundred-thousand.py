@@ -45,6 +45,12 @@ while True:
 
         # Update display when a change is detected
         if number_of_followers != previous_followers:
+            # LED control
+            if number_of_followers > previous_followers:
+                green_led.on()
+            elif number_of_followers < previous_followers:
+                red_led.on()
+
             # Motor position control
             motor_position = int(translate(number_of_followers, 0, 100000, 0, 2048))
             if motor_position != previous_motor_position:
@@ -56,11 +62,7 @@ while True:
                 # Rotate motor
                 myUln200xa.stepperSteps(motor_delta)
 
-            # LED control
-            if number_of_followers > previous_followers:
-                green_led.on()
-            elif number_of_followers < previous_followers:
-                red_led.on()
+            # Print outputs
             print "Followers: %s - Motor position: %s - %s" % (number_of_followers, motor_position, time.asctime(time.localtime(time.time())))
             previous_followers = number_of_followers
             previous_motor_position = motor_position
