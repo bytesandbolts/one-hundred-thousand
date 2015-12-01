@@ -51,7 +51,7 @@ while True:
                 motor_delta = motor_position - previous_motor_position
                 if motor_position > previous_motor_position:
                     myUln200xa.setDirection(upmULN200XA.ULN200XA.DIR_CCW)
-                elif: motor_position < previous_motor_position:
+                elif motor_position < previous_motor_position:
                     myUln200xa.setDirection(upmULN200XA.ULN200XA.DIR_CCW)
                 finally:
                     myUln200xa.stepperSteps(motor_delta)
