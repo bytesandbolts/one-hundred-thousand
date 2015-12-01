@@ -12,16 +12,15 @@ laura_user_id = "201990584"
 previous_followers = 0
 previous_motor_position = 0
 
+# Motor
+myUln200xa = 0
+
 # LED setup
 green_led = grove.GroveLed(2)
 red_led = grove.GroveLed(3)
 
 # Instagram API setup
 api = InstagramAPI(access_token=access_token, client_secret=client_secret)
-
-# Stepper motor setup
-myUln200xa = upmULN200XA.ULN200XA(4096, 8, 9, 10, 11)
-myUln200xa.setSpeed(5) # 5 RPMs
 
 # range mapper
 def translate(value, leftMin, leftMax, rightMin, rightMax):
@@ -54,6 +53,10 @@ while True:
             # Motor position control
             motor_position = int(translate(number_of_followers, 0, 100000, 0, 2048))
             if motor_position != previous_motor_position:
+                # Stepper motor setup
+                myUln200xa = upmULN200XA.ULN200XA(4096, 8, 9, 10, 11)
+                myUln200xa.setSpeed(5) # 5 RPMs
+
                 # abs ensures number is always positive
                 motor_delta = abs(motor_position - previous_motor_position)
                 if motor_position > previous_motor_position:
@@ -62,6 +65,7 @@ while True:
                     myUln200xa.setDirection(upmULN200XA.ULN200XA.DIR_CW)
                 # Rotate motor
                 myUln200xa.stepperSteps(motor_delta)
+                myUln200xa.release()
 
             # Print outputs
             print "Followers: %s - Motor position: %s - %s" % (number_of_followers, motor_position, time.asctime(time.localtime(time.time())))
