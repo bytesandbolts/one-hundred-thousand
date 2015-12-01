@@ -61,7 +61,7 @@ while True:
                 green_led.on()
             elif number_of_followers < previous_followers:
                 red_led.on()
-            print "Followers: %s - %s" % (number_of_followers, time.asctime(time.localtime(time.time())))
+            print "Followers: %s - Motor position: %s - %s" % (number_of_followers, motor_position, time.asctime(time.localtime(time.time())))
             previous_followers = number_of_followers
             previous_motor_position = motor_position
 
