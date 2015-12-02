@@ -6,8 +6,7 @@ import sys, time
 
 access_token = "176201887.877f884.1cdbffd746974bb489a66c2b1df0e958"
 client_secret = "e8336639f78444919b8b3f4c1ef0c326"
-dan_user_id = "176201887"
-laura_user_id = "201990584"
+user_id = "201990584"
 
 previous_followers = 0
 previous_motor_position = 0
@@ -20,7 +19,7 @@ green_led = grove.GroveLed(2)
 red_led = grove.GroveLed(3)
 
 # Instagram API setup
-api = InstagramAPI(access_token=access_token, client_secret=client_secret)
+api = InstagramAPI(access_token = access_token, client_secret = client_secret)
 
 # range mapper
 def translate(value, leftMin, leftMax, rightMin, rightMax):
@@ -32,12 +31,12 @@ def translate(value, leftMin, leftMax, rightMin, rightMax):
     valueScaled = float(value - leftMin) / float(leftSpan)
 
     # Convert the 0-1 range into a value in the right range.
-    return rightMin + (valueScaled * rightSpan)
+    return int(rightMin + (valueScaled * rightSpan))
 
 while True:
     try:
         # Poll Instagram API
-        user_info = api.user(user_id=laura_user_id)
+        user_info = api.user(user_id = user_id)
 
         # Parse received data
         number_of_followers = user_info.counts["followed_by"]
@@ -51,20 +50,21 @@ while True:
                 red_led.on()
 
             # Motor position control
-            motor_position = int(translate(number_of_followers, 0, 100000, 0, 2048))
+            motor_position = translate(number_of_followers, 0, 100000, 0, 2048)
             if motor_position != previous_motor_position:
                 # Stepper motor setup
                 myUln200xa = upmULN200XA.ULN200XA(4096, 8, 9, 10, 11)
                 myUln200xa.setSpeed(5) # 5 RPMs
 
-                # abs ensures number is always positive
-                motor_delta = abs(motor_position - previous_motor_position)
+                motor_delta = motor_position - previous_motor_position
                 if motor_position > previous_motor_position:
                     myUln200xa.setDirection(upmULN200XA.ULN200XA.DIR_CCW)
                 elif motor_position < previous_motor_position:
                     myUln200xa.setDirection(upmULN200XA.ULN200XA.DIR_CW)
                 # Rotate motor
-                myUln200xa.stepperSteps(motor_delta)
+                # abs ensures number is always positive which is required by underlying library
+                myUln200xa.stepperSteps(abs(motor_delta))
+                # Release otherwise motor begins to heat up quite hot.
                 myUln200xa.release()
 
             # Print outputs
