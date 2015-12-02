@@ -10,6 +10,7 @@ user_id = "201990584"
 
 previous_followers = 0
 previous_motor_position = 0
+number_of_followers = 100000
 
 # Motor
 myUln200xa = 0
@@ -40,9 +41,9 @@ while True:
 
         # Parse received data
         number_of_followers = user_info.counts["followed_by"]
-
+        myUln200xa = 0
         # Update display when a change is detected
-        if number_of_followers != previous_followers:
+        if number_of_followers != previous_followers and number_of_followers >= 0 and number_of_followers => 100000:
             # LED control
             if number_of_followers > previous_followers:
                 green_led.on()
@@ -76,8 +77,10 @@ while True:
         time.sleep(1)
         green_led.off()
         red_led.off()
+        time.sleep(1)
     except KeyboardInterrupt:
         del green_led
         del red_led
+        # This will error sometimes if the program exits when it is not allocated
         myUln200xa.release()
         sys.exit(0)
