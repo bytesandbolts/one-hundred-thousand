@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 from instagram.client import InstagramAPI
 
-client_id = "877f884c9e4d40cf85031245d76a8593"
-client_secret = "e8336639f78444919b8b3f4c1ef0c326"
+# You need to fill out these 2 lines.
+# Need to create and instagram dev account to get a client id and client secret
+client_id = ""
+client_secret = ""
 
 api = InstagramAPI(client_id=client_id, client_secret=client_secret)
 popular_media = api.media_popular(count=20)
